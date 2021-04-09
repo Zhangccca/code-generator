@@ -11,6 +11,9 @@ import com.shebao.framework.util.page.PageRequest;
 import com.shebao.framework.util.page.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
@@ -23,20 +26,30 @@ import java.util.List;
  * @email ${email}
  * @date ${datetime}
  */
+@Api(tags = "")
 @RestController
 @RequestMapping("${pathPrefix}${moduleName}")
+@Slf4j
 public class ${className}Controller {
     @Autowired
     private ${className}Service ${classname}Service;
 
 
 
+    /**
+    * 列表查询
+    */
+    @ApiOperation(value = "列表查询")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResultData<List<${className}VO>> list(${className}DTO ${classname}DTO) {
         List<${className}VO> list = ${classname}Service.findList(${classname}DTO);
         return ResultData.success("成功", list);
     }
 
+    /**
+    * 分页查询
+    */
+    @ApiOperation(value = "分页查询")
     @RequestMapping(value = "/pageList", method = RequestMethod.GET)
     public ResultData<Pagination<${className}VO>> pageList(PageRequest<${className}DTO> pageRequest) {
         List<${className}VO> list = ${classname}Service.findListForPage(pageRequest);
@@ -47,8 +60,9 @@ public class ${className}Controller {
 
 
     /**
-     * 信息
+     * 详情
      */
+    @ApiOperation(value = "分页查询")
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public ResultData<${className}VO> info(Long id) {
         ${className}VO ${classname}VO = ${classname}Service.selectById(id);
@@ -58,6 +72,7 @@ public class ${className}Controller {
     /**
      * 保存
      */
+    @ApiOperation(value = "保存")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResultData<Integer> save(@RequestBody ${className}DTO ${classname}DTO) {
         Integer i = ${classname}Service.insertSelective(${classname}DTO);
@@ -67,6 +82,7 @@ public class ${className}Controller {
     /**
      * 修改
      */
+    @ApiOperation(value = "修改")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResultData<Integer> update(${className}DTO ${classname}DTO) {
         Integer i = ${classname}Service.updateById(${classname}DTO);
@@ -76,6 +92,7 @@ public class ${className}Controller {
     /**
      * 删除
      */
+    @ApiOperation(value = "删除")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ResultData<Integer> delete(Long id) {
         Integer i = ${classname}Service.deleteById(id);

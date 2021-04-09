@@ -1,5 +1,6 @@
 package ${package}.${moduleName}.vo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 #if(${hasBigDecimal})
@@ -23,6 +24,7 @@ public class ${className}VO{
 /**
  * $column.comments
  */
+@ApiModelProperty("$column.comments")
 private $column.attrType $column.attrname;
 #end
 
