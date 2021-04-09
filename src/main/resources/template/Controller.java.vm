@@ -4,7 +4,6 @@ package ${package}.controller.${moduleName};
 
 import ${package}.${moduleName}.dto.${className}DTO;
 import ${package}.${moduleName}.vo.${className}VO;
-import ${package}.${moduleName}.entity.${className};
 import ${package}.service.${moduleName}.${className}Service;
 import com.shebao.framework.util.bean.ResultData;
 import com.shebao.framework.util.page.PageRequest;
@@ -42,8 +41,8 @@ public class ${className}Controller {
     @ApiOperation(value = "列表查询")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResultData<List<${className}VO>> list(${className}DTO ${classname}DTO) {
-        List<${className}VO> list = ${classname}Service.findList(${classname}DTO);
-        return ResultData.success("成功", list);
+        ResultData<List<${className}VO>> resultData = ${classname}Service.findList(${classname}DTO);
+        return resultData;
     }
 
     /**
@@ -52,9 +51,9 @@ public class ${className}Controller {
     @ApiOperation(value = "分页查询")
     @RequestMapping(value = "/pageList", method = RequestMethod.GET)
     public ResultData<Pagination<${className}VO>> pageList(PageRequest<${className}DTO> pageRequest) {
-        List<${className}VO> list = ${classname}Service.findListForPage(pageRequest);
+        ResultData<List<${className}VO>> resultData = ${classname}Service.findListForPage(pageRequest);
         Pagination<${className}VO> pagination = new Pagination<>();
-        pagination.setList(list);
+        pagination.setList(resultData.getData());
         return ResultData.success("成功", pagination);
     }
 
@@ -65,8 +64,8 @@ public class ${className}Controller {
     @ApiOperation(value = "分页查询")
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public ResultData<${className}VO> info(Long id) {
-        ${className}VO ${classname}VO = ${classname}Service.selectById(id);
-        return ResultData.success("", ${classname}VO);
+        ResultData<${className}VO> resultData = ${classname}Service.selectById(id);
+        return resultData;
     }
 
     /**
@@ -75,8 +74,8 @@ public class ${className}Controller {
     @ApiOperation(value = "保存")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResultData<Integer> save(@RequestBody ${className}DTO ${classname}DTO) {
-        Integer i = ${classname}Service.insertSelective(${classname}DTO);
-        return ResultData.success("成功", i);
+        ResultData<Integer> resultData = ${classname}Service.insertSelective(${classname}DTO);
+        return resultData;
     }
 
     /**
@@ -85,8 +84,8 @@ public class ${className}Controller {
     @ApiOperation(value = "修改")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResultData<Integer> update(${className}DTO ${classname}DTO) {
-        Integer i = ${classname}Service.updateById(${classname}DTO);
-        return ResultData.success("成功", i);
+        ResultData<Integer> resultData = ${classname}Service.updateById(${classname}DTO);
+        return resultData;
     }
 
     /**
@@ -95,8 +94,8 @@ public class ${className}Controller {
     @ApiOperation(value = "删除")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ResultData<Integer> delete(Long id) {
-        Integer i = ${classname}Service.deleteById(id);
-        return ResultData.success("成功", i);
+        ResultData<Integer> resultData = ${classname}Service.deleteById(id);
+        return resultData;
     }
 
 }

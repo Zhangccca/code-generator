@@ -6,6 +6,7 @@ import ${package}.${moduleName}.vo.${className}VO;
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.mapper.${className}Mapper;
 import ${package}.service.${moduleName}.${className}Service;
+import com.shebao.framework.util.bean.ResultData;
 import org.springframework.stereotype.Service;
 import com.shebao.framework.util.page.PageRequest;
 import org.springframework.beans.BeanUtils;
@@ -24,44 +25,51 @@ public class ${className}ServiceImpl  implements ${className}Service {
     ${className}Mapper ${classname}Mapper;
 
     @Override
-    public List<${className}VO> findList(${className}DTO ${classname}DTO) {
-        return ${classname}Mapper.findList(${classname}DTO);
+    public ResultData<List<${className}VO>> findList(${className}DTO ${classname}DTO) {
+        List<${className}VO> list = ${classname}Mapper.findList(${classname}DTO);
+        return ResultData.success("", list);
     }
 
     @Override
-    public List<${className}VO> findListForPage(PageRequest<${className}DTO> pageRequest) {
+    public ResultData<List<${className}VO>> findListForPage(PageRequest<${className}DTO> pageRequest) {
         ${className}DTO ${classname}DTO = pageRequest.getData();
-        return ${classname}Mapper.findListForPage(${classname}DTO);
+        List<${className}VO> list = ${classname}Mapper.findListForPage(${classname}DTO);
+        return ResultData.success("", list);
     }
 
     @Override
-    public ${className}VO selectById(Long id) {
-        return ${classname}Mapper.selectById(id);
+    public ResultData<${className}VO> selectById(Long id) {
+        ${className}VO ${classname}VO = ${classname}Mapper.selectById(id);
+        return ResultData.success("", ${classname}VO);
     }
 
     @Override
-    public Integer insert(${className}DTO ${classname}DTO) {
+    public ResultData<Integer> insert(${className}DTO ${classname}DTO) {
         ${className} ${classname} = new ${className}();
         BeanUtils.copyProperties(${classname}DTO, ${classname});
-        return ${classname}Mapper.insert(${classname});
+        Integer insert =  ${classname}Mapper.insert(${classname});
+        return ResultData.success("", insert);
     }
 
     @Override
-    public Integer insertSelective(${className}DTO ${classname}DTO) {
+    public ResultData<Integer> insertSelective(${className}DTO ${classname}DTO) {
         ${className} ${classname} = new ${className}();
         BeanUtils.copyProperties(${classname}DTO, ${classname});
-        return ${classname}Mapper.insertSelective(${classname});
+        Integer insert =${classname}Mapper.insertSelective(${classname});
+        return ResultData.success("", insert);
     }
 
     @Override
-    public Integer updateById(${className}DTO ${classname}DTO) {
+    public ResultData<Integer> updateById(${className}DTO ${classname}DTO) {
         ${className} ${classname} = new ${className}();
         BeanUtils.copyProperties(${classname}DTO, ${classname});
-        return ${classname}Mapper.updateById(${classname});
+        Integer update =${classname}Mapper.updateById(${classname});
+        return ResultData.success("", update);
     }
 
     @Override
-    public Integer deleteById(Long id) {
-        return ${classname}Mapper.deleteById(id);
+    public ResultData<Integer> deleteById(Long id) {
+        Integer delete =${classname}Mapper.deleteById(id);
+        return ResultData.success("", delete);
     }
 }
