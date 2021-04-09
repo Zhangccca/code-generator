@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${package}.${moduleName}.mapper.${className}Mapper">
+
+    <resultMap type="${package}.${moduleName}.entity.${className}" id="${classname}Map">
+        #foreach($column in $columns)
+                <result property="${column.attrname}" column="${column.columnName}"/>
+        #end
+    </resultMap>
+
+    <resultMap type="${package}.${moduleName}.vo.${className}VO" id="${classname}VoMap">
+        #foreach($column in $columns)
+            <result property="${column.attrname}" column="${column.columnName}"/>
+        #end
+    </resultMap>
+
+
+    <!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+        <![CDATA[
+        #foreach($column in $columns)
+            ${column.columnName}#if($velocityHasNext),#end
+        #end
+        ]]>
+	</sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="$pk.columnName">
+        <![CDATA[
+            INSERT INTO $tableName (
+            #foreach($column in $columns)
+                $column.columnName#if($velocityHasNext),#end
+            #end
+            ) VALUES (
+            #foreach($column in $columns)
+                #{$column.attrname}#if($velocityHasNext),#end
+            #end
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="$pk.columnName">
+        INSERT INTO $tableName
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #foreach($column in $columns)
+                    #if($column.attrType=='String')
+                        <if test="$column.attrname != null and $column.attrname != ''">
+                        $column.columnName#if($velocityHasNext),#end
+                        </if>
+                    #else
+                        <if test="$column.attrname != null">
+                        $column.columnName#if($velocityHasNext),#end
+                        </if>
+                    #end
+                #end
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                #foreach($column in $columns)
+                        #if($column.attrType=='String')
+                        <if test="$column.attrname != null and $column.attrname != ''">
+                        #{$column.attrname}#if($velocityHasNext),#end
+                        </if>
+                    #else
+                        <if test="$column.attrname != null">
+                        #{$column.attrname}#if($velocityHasNext),#end
+                        </if>
+                    #end
+                #end
+        </trim>
+    </insert>
+
+	<sql id="findPage_where">
+		<where>
+			#foreach($column in $columns)
+				#if($column.attrType=='String')
+					 <if test="$column.attrname != null and $column.attrname != ''">
+					  	AND $column.columnName = #{$column.attrname}
+			  		 </if>
+			   #else
+			   		 <if test="$column.attrname != null">
+			    		AND $column.columnName=#{$column.attrname}
+			    	 </if>
+			   #end
+			#end
+		</where>
+	</sql>
+
+
+	  <sql id="update_sql">
+         <set>
+          #foreach($column in $notPkColumns)
+          	#if($column.attrType=='String')
+		    	 <if test="$column.attrname != null and $column.attrname != ''">
+		    	 $column.columnName=#{$column.attrname} #if($velocityHasNext),#end
+		    	 </if>
+	    	 #else
+	    	 	 <if test="$column.attrname != null">
+		    	 $column.columnName=#{$column.attrname} #if($velocityHasNext),#end
+		    	 </if>
+	    	#end
+	      #end
+       </set>
+    </sql>
+
+    <select id="findList" resultMap="${classname}VoMap">
+		SELECT
+		<include refid="columns" />
+		FROM $tableName
+		<include refid="findPage_where"/>
+	</select>
+
+    <select id="findListForPage" resultMap="${classname}VoMap">
+        SELECT
+        <include refid="columns" />
+        FROM $tableName
+        <include refid="findPage_where"/>
+    </select>
+
+    <select id="selectById" resultMap="${classname}VoMap">
+        SELECT
+        <include refid="columns" />
+        FROM $tableName
+        WHERE
+        $pk.columnName = #{$pk.attrname}
+    </select>
+
+
+	<update id="updateById" >
+        UPDATE  $tableName
+        <include refid="update_sql" />
+        WHERE
+		$pk.columnName = #{$pk.attrname}
+	</update>
+
+    <update id="deleteById">
+		UPDATE $tableName SET
+        is_delete = 1
+		WHERE
+		$pk.columnName = #{$pk.attrname}
+	</update>
+</mapper>

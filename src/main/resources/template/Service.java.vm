@@ -1,0 +1,34 @@
+package ${package}.service.${moduleName};
+
+import ${package}.${moduleName}.dto.${className}DTO;
+import ${package}.${moduleName}.vo.${className}VO;
+import com.shebao.framework.util.page.PageRequest;
+
+import java.util.List;
+
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}Service {
+    List<TemplateCodeGenVO> findList(${className}DTO ${classname}DTO);
+
+    List<${className}VO> findListForPage(PageRequest<${className}DTO> pageRequest);
+
+    ${className}VO selectById(Long id);
+
+    Integer insert(${className}DTO ${classname}DTO);
+
+    Integer insertSelective(${className}DTO ${classname}DTO);
+
+    Integer updateById(${className}DTO ${classname}DTO);
+
+    Integer deleteById(Long id);
+
+
+}
+

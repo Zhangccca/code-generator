@@ -1,0 +1,85 @@
+package ${package}.controller.${moduleName};
+
+
+
+import ${package}.${moduleName}.dto.${className}DTO;
+import ${package}.${moduleName}.vo.${className}VO;
+import ${package}.${moduleName}.entity.${className};
+import ${package}.service.${moduleName}.${className}Service;
+import com.shebao.framework.util.bean.ResultData;
+import com.shebao.framework.util.page.PageRequest;
+import com.shebao.framework.util.page.Pagination;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@RestController
+@RequestMapping("${pathPrefix}${moduleName}")
+public class ${className}Controller {
+    @Autowired
+    private ${className}Service ${classname}Service;
+
+
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResultData<List<${className}VO>> list(${className}DTO ${classname}DTO) {
+        List<${className}VO> list = ${classname}Service.findList(${classname}DTO);
+        return ResultData.success("成功", list);
+    }
+
+    @RequestMapping(value = "/pageList", method = RequestMethod.GET)
+    public ResultData<Pagination<${className}VO>> pageList(PageRequest<${className}DTO> pageRequest) {
+        List<${className}VO> list = ${classname}Service.findListForPage(pageRequest);
+        Pagination<${className}VO> pagination = new Pagination<>();
+        pagination.setList(list);
+        return ResultData.success("成功", pagination);
+    }
+
+
+    /**
+     * 信息
+     */
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public ResultData<${className}VO> info(Long id) {
+        ${className}VO ${classname}VO = ${classname}Service.selectById(id);
+        return ResultData.success("", ${classname}VO);
+    }
+
+    /**
+     * 保存
+     */
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public ResultData<Integer> save(@RequestBody ${className}DTO ${classname}DTO) {
+        Integer i = ${classname}Service.insertSelective(${classname}DTO);
+        return ResultData.success("成功", i);
+    }
+
+    /**
+     * 修改
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResultData<Integer> update(${className}DTO ${classname}DTO) {
+        Integer i = ${classname}Service.updateById(${classname}DTO);
+        return ResultData.success("成功", i);
+    }
+
+    /**
+     * 删除
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public ResultData<Integer> delete(Long id) {
+        Integer i = ${classname}Service.deleteById(id);
+        return ResultData.success("成功", i);
+    }
+
+}

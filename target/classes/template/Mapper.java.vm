@@ -1,0 +1,33 @@
+package ${package}.${moduleName}.mapper;
+
+import ${package}.${moduleName}.entity.${className};
+import ${package}.${moduleName}.dto.${className}DTO;
+import ${package}.${moduleName}.vo.${className}VO;
+
+import java.util.List;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}Mapper {
+
+    List<TemplateCodeGenVO> findList(${className}DTO ${classname}DTO);
+
+    List<${className}VO> findListForPage(${className}DTO ${classname}DTO);
+
+    ${className}VO selectById(Long id);
+
+    Integer insert(${className} ${classname});
+
+    Integer insertSelective(${className} ${classname});
+
+    Integer updateById(${className} ${classname});
+
+    Integer deleteById(Long id);
+
+
+}
