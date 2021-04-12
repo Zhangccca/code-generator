@@ -61,7 +61,7 @@ public class ${className}Controller {
     /**
      * 详情
      */
-    @ApiOperation(value = "分页查询")
+    @ApiOperation(value = "详情查询")
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public ResultData<${className}VO> info(Long id) {
         ResultData<${className}VO> resultData = ${classname}Service.selectById(id);
