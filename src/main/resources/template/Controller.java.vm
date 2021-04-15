@@ -83,7 +83,7 @@ public class ${className}Controller {
      */
     @ApiOperation(value = "修改")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResultData<Integer> update(${className}DTO ${classname}DTO) {
+    public ResultData<Integer> update(@RequestBody ${className}DTO ${classname}DTO) {
         ResultData<Integer> resultData = ${classname}Service.updateById(${classname}DTO);
         return resultData;
     }
