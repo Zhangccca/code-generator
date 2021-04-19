@@ -19,7 +19,7 @@ public interface ${className}Service {
 
     ResultData<List<${className}VO>> findList(${className}DTO ${classname}DTO);
 
-    ResultData<List<${className}VO>> findListForPage(PageRequest<${className}DTO> pageRequest);
+    ResultData<List<${className}VO>> findListForPage(${className}DTO ${classname}DTO);
 
     ResultData<${className}VO> selectById(Long id);
 

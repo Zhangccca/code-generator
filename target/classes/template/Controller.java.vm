@@ -6,7 +6,6 @@ import ${package}.${moduleName}.dto.${className}DTO;
 import ${package}.${moduleName}.vo.${className}VO;
 import ${package}.service.${moduleName}.${className}Service;
 import com.shebao.framework.util.bean.ResultData;
-import com.shebao.framework.util.page.PageRequest;
 import com.shebao.framework.util.page.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,8 +49,8 @@ public class ${className}Controller {
     */
     @ApiOperation(value = "分页查询")
     @RequestMapping(value = "/pageList", method = RequestMethod.GET)
-    public ResultData<Pagination<${className}VO>> pageList(PageRequest<${className}DTO> pageRequest) {
-        ResultData<List<${className}VO>> resultData = ${classname}Service.findListForPage(pageRequest);
+    public ResultData<Pagination<${className}VO>> pageList(${className}DTO ${classname}DTO) {
+        ResultData<List<${className}VO>> resultData = ${classname}Service.findListForPage(${classname}DTO);
         Pagination<${className}VO> pagination = new Pagination<>();
         pagination.setList(resultData.getData());
         return ResultData.success("成功", pagination);
@@ -83,7 +82,7 @@ public class ${className}Controller {
      */
     @ApiOperation(value = "修改")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResultData<Integer> update(${className}DTO ${classname}DTO) {
+    public ResultData<Integer> update(@RequestBody ${className}DTO ${classname}DTO) {
         ResultData<Integer> resultData = ${classname}Service.updateById(${classname}DTO);
         return resultData;
     }
