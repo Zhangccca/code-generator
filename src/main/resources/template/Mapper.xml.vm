@@ -107,6 +107,9 @@
 		<include refid="columns" />
 		FROM $tableName
 		<include refid="findPage_where"/>
+        <if test="orderByField != null and orderByField !=''">
+            ${orderByField}
+        </if>
 	</select>
 
     <select id="findListForPage" resultMap="${classname}VoMap">
@@ -114,6 +117,9 @@
         <include refid="columns" />
         FROM $tableName
         <include refid="findPage_where"/>
+        <if test="orderByField != null and orderByField !=''">
+            ${orderByField}
+        </if>
     </select>
 
     <select id="selectById" resultMap="${classname}VoMap">

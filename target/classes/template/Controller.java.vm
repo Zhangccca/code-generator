@@ -5,6 +5,7 @@ package ${package}.controller.${moduleName};
 import ${package}.${moduleName}.dto.${className}DTO;
 import ${package}.${moduleName}.vo.${className}VO;
 import ${package}.service.${moduleName}.${className}Service;
+import com.shebao.framework.util.page.PageParamVo;
 import com.shebao.framework.util.bean.ResultData;
 import com.shebao.framework.util.page.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class ${className}Controller {
     @ApiOperation(value = "列表查询")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResultData<List<${className}VO>> list(${className}DTO ${classname}DTO) {
+        ${classname}DTO.setOrderByField(PageParamVo.concatOrderBy(${classname}DTO.getAscs(),${classname}DTO.getDescs()));
         ResultData<List<${className}VO>> resultData = ${classname}Service.findList(${classname}DTO);
         return resultData;
     }
@@ -50,6 +52,7 @@ public class ${className}Controller {
     @ApiOperation(value = "分页查询")
     @RequestMapping(value = "/pageList", method = RequestMethod.GET)
     public ResultData<Pagination<${className}VO>> pageList(${className}DTO ${classname}DTO) {
+        ${classname}DTO.setOrderByField(PageParamVo.concatOrderBy(${classname}DTO.getAscs(),${classname}DTO.getDescs()));
         ResultData<List<${className}VO>> resultData = ${classname}Service.findListForPage(${classname}DTO);
         Pagination<${className}VO> pagination = new Pagination<>();
         pagination.setList(resultData.getData());
