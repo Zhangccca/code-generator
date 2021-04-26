@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.vo;
+package ${package}.${moduleName}.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -18,9 +18,9 @@ import java.util.Date;
  * @date ${datetime}
  */
 @Data
-public class ${className}VO{
+public class ${className}InsertDTO{
 
-#foreach ($column in $columns)
+#foreach ($column in $notPkColumns)
 /**
  * $column.comments
  */

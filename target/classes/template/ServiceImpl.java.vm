@@ -1,7 +1,9 @@
 package ${package}.service.${moduleName}.impl;
 
 
-import ${package}.${moduleName}.dto.${className}DTO;
+import ${package}.${moduleName}.dto.${className}QueryDTO;
+import ${package}.${moduleName}.dto.${className}InsertDTO;
+import ${package}.${moduleName}.dto.${className}UpdateDTO;
 import ${package}.${moduleName}.vo.${className}VO;
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.mapper.${className}Mapper;
@@ -23,14 +25,14 @@ public class ${className}ServiceImpl  implements ${className}Service {
     ${className}Mapper ${classname}Mapper;
 
     @Override
-    public ResultData<List<${className}VO>> findList(${className}DTO ${classname}DTO) {
-        List<${className}VO> list = ${classname}Mapper.findList(${classname}DTO);
+    public ResultData<List<${className}VO>> findList(${className}QueryDTO ${classname}QueryDTO) {
+        List<${className}VO> list = ${classname}Mapper.findList(${classname}QueryDTO);
         return ResultData.success("", list);
     }
 
     @Override
-    public ResultData<List<${className}VO>> findListForPage(${className}DTO ${classname}DTO) {
-        List<${className}VO> list = ${classname}Mapper.findListForPage(${classname}DTO);
+    public ResultData<List<${className}VO>> findListForPage(${className}QueryDTO ${classname}QueryDTO) {
+        List<${className}VO> list = ${classname}Mapper.findListForPage(${classname}QueryDTO);
         return ResultData.success("", list);
     }
 
@@ -41,25 +43,25 @@ public class ${className}ServiceImpl  implements ${className}Service {
     }
 
     @Override
-    public ResultData<Integer> insert(${className}DTO ${classname}DTO) {
+    public ResultData<Integer> insert(${className}InsertDTO ${classname}InsertDTO) {
         ${className} ${classname} = new ${className}();
-        BeanUtils.copyProperties(${classname}DTO, ${classname});
+        BeanUtils.copyProperties(${classname}InsertDTO, ${classname});
         Integer insert =  ${classname}Mapper.insert(${classname});
         return ResultData.success("", insert);
     }
 
     @Override
-    public ResultData<Integer> insertSelective(${className}DTO ${classname}DTO) {
+    public ResultData<Integer> insertSelective(${className}InsertDTO ${classname}InsertDTO) {
         ${className} ${classname} = new ${className}();
-        BeanUtils.copyProperties(${classname}DTO, ${classname});
+        BeanUtils.copyProperties(${classname}InsertDTO, ${classname});
         Integer insert =${classname}Mapper.insertSelective(${classname});
         return ResultData.success("", insert);
     }
 
     @Override
-    public ResultData<Integer> updateById(${className}DTO ${classname}DTO) {
+    public ResultData<Integer> updateById(${className}UpdateDTO ${classname}UpdateDTO) {
         ${className} ${classname} = new ${className}();
-        BeanUtils.copyProperties(${classname}DTO, ${classname});
+        BeanUtils.copyProperties(${classname}UpdateDTO, ${classname});
         Integer update =${classname}Mapper.updateById(${classname});
         return ResultData.success("", update);
     }

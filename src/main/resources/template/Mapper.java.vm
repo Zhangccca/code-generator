@@ -1,7 +1,9 @@
 package ${package}.${moduleName}.mapper;
 
 import ${package}.${moduleName}.entity.${className};
-import ${package}.${moduleName}.dto.${className}DTO;
+import ${package}.${moduleName}.dto.${className}QueryDTO;
+import ${package}.${moduleName}.dto.${className}InsertDTO;
+import ${package}.${moduleName}.dto.${className}UpdateDTO;
 import ${package}.${moduleName}.vo.${className}VO;
 
 import java.util.List;
@@ -15,9 +17,9 @@ import java.util.List;
  */
 public interface ${className}Mapper {
 
-    List<TemplateCodeGenVO> findList(${className}DTO ${classname}DTO);
+    List<TemplateCodeGenVO> findList(${className}QueryDTO ${classname}QueryDTO);
 
-    List<${className}VO> findListForPage(${className}DTO ${classname}DTO);
+    List<${className}VO> findListForPage(${className}QueryDTO ${classname}QueryDTO);
 
     ${className}VO selectById(Long id);
 

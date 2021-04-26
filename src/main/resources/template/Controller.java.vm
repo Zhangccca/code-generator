@@ -2,7 +2,9 @@ package ${package}.controller.${moduleName};
 
 
 
-import ${package}.${moduleName}.dto.${className}DTO;
+import ${package}.${moduleName}.dto.${className}InsertDTO;
+import ${package}.${moduleName}.dto.${className}UpdateDTO;
+import ${package}.${moduleName}.dto.${className}QueryDTO;
 import ${package}.${moduleName}.vo.${className}VO;
 import ${package}.service.${moduleName}.${className}Service;
 import com.shebao.framework.util.page.PageParamVo;
@@ -40,9 +42,9 @@ public class ${className}Controller {
     */
     @ApiOperation(value = "列表查询")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResultData<List<${className}VO>> list(${className}DTO ${classname}DTO) {
-        ${classname}DTO.setOrderByField(PageParamVo.concatOrderBy(${classname}DTO.getAscs(),${classname}DTO.getDescs()));
-        ResultData<List<${className}VO>> resultData = ${classname}Service.findList(${classname}DTO);
+    public ResultData<List<${className}VO>> list(${className}QueryDTO ${classname}QueryDTO) {
+        ${classname}QueryDTO.setOrderByField(PageParamVo.concatOrderBy(${classname}QueryDTO.getAscs(),${classname}QueryDTO.getDescs()));
+        ResultData<List<${className}VO>> resultData = ${classname}Service.findList(${classname}QueryDTO);
         return resultData;
     }
 
@@ -51,9 +53,9 @@ public class ${className}Controller {
     */
     @ApiOperation(value = "分页查询")
     @RequestMapping(value = "/pageList", method = RequestMethod.GET)
-    public ResultData<Pagination<${className}VO>> pageList(${className}DTO ${classname}DTO) {
-        ${classname}DTO.setOrderByField(PageParamVo.concatOrderBy(${classname}DTO.getAscs(),${classname}DTO.getDescs()));
-        ResultData<List<${className}VO>> resultData = ${classname}Service.findListForPage(${classname}DTO);
+    public ResultData<Pagination<${className}VO>> pageList(${className}QueryDTO ${classname}QueryDTO) {
+        ${classname}QueryDTO.setOrderByField(PageParamVo.concatOrderBy(${classname}QueryDTO.getAscs(),${classname}QueryDTO.getDescs()));
+        ResultData<List<${className}VO>> resultData = ${classname}Service.findListForPage(${classname}QueryDTO);
         Pagination<${className}VO> pagination = new Pagination<>();
         pagination.setList(resultData.getData());
         return ResultData.success("成功", pagination);
@@ -75,8 +77,8 @@ public class ${className}Controller {
      */
     @ApiOperation(value = "保存")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ResultData<Integer> save(@RequestBody ${className}DTO ${classname}DTO) {
-        ResultData<Integer> resultData = ${classname}Service.insertSelective(${classname}DTO);
+    public ResultData<Integer> save(@RequestBody ${className}InsertDTO ${classname}InsertDTO) {
+        ResultData<Integer> resultData = ${classname}Service.insertSelective(${classname}InsertDTO);
         return resultData;
     }
 
@@ -85,8 +87,8 @@ public class ${className}Controller {
      */
     @ApiOperation(value = "修改")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResultData<Integer> update(@RequestBody ${className}DTO ${classname}DTO) {
-        ResultData<Integer> resultData = ${classname}Service.updateById(${classname}DTO);
+    public ResultData<Integer> update(@RequestBody ${className}UpdateDTO ${classname}UpdateDTO) {
+        ResultData<Integer> resultData = ${classname}Service.updateById(${classname}UpdateDTO);
         return resultData;
     }
 

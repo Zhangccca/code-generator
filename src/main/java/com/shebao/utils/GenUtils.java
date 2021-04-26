@@ -35,7 +35,9 @@ public class GenUtils {
     public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
         templates.add("template/Entity.java.vm");
-        templates.add("template/DTO.java.vm");
+        templates.add("template/InsertDTO.java.vm");
+        templates.add("template/QueryDTO.java.vm");
+        templates.add("template/UpdateDTO.java.vm");
         templates.add("template/VO.java.vm");
         templates.add("template/Mapper.java.vm");
         templates.add("template/Mapper.xml.vm");
@@ -211,8 +213,14 @@ public class GenUtils {
         if (template.contains("Entity.java.vm")) {
             return packagePath + "entity" + File.separator + className + ".java";
         }
-        if (template.contains("DTO.java.vm")) {
-            return packagePath + "dto" + File.separator + className + "DTO.java";
+        if (template.contains("QueryDTO.java.vm")) {
+            return packagePath + "dto" + File.separator + className + "QueryDTO.java";
+        }
+        if (template.contains("InsertDTO.java.vm")) {
+            return packagePath + "dto" + File.separator + className + "InsertDTO.java";
+        }
+        if (template.contains("UpdateDTO.java.vm")) {
+            return packagePath + "dto" + File.separator + className + "UpdateDTO.java";
         }
         if (template.contains("VO.java.vm")) {
             return packagePath + "vo" + File.separator + className + "VO.java";

@@ -1,5 +1,6 @@
-package ${package}.${moduleName}.vo;
+package ${package}.${moduleName}.dto;
 
+import com.shebao.framework.util.page.PageParamVo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -18,7 +19,7 @@ import java.util.Date;
  * @date ${datetime}
  */
 @Data
-public class ${className}VO{
+public class ${className}QueryDTO extends PageParamVo{
 
 #foreach ($column in $columns)
 /**
