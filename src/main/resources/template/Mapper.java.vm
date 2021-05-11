@@ -23,6 +23,8 @@ public interface ${className}Mapper {
 
     ${className}VO selectById(Long id);
 
+    ${className}VO selectOne(${className}QueryDTO ${classname}QueryDTO);
+
     Integer insert(${className} ${classname});
 
     Integer insertSelective(${className} ${classname});

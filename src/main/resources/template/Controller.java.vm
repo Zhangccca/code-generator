@@ -65,10 +65,18 @@ public class ${className}Controller {
     /**
      * 详情
      */
-    @ApiOperation(value = "详情查询")
+    @ApiOperation(value = "详情查询-根据主键")
     @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public ResultData<${className}VO> info(Long id) {
+    public ResultData<${className}VO> infoById(Long id) {
         ResultData<${className}VO> resultData = ${classname}Service.selectById(id);
+        return resultData;
+    }
+
+
+    @ApiOperation(value = "查询单个-根据动态参数")
+    @RequestMapping(value = "/selectOne", method = RequestMethod.GET)
+    public ResultData<${className}VO> selectOne(${className}QueryDTO ${classname}QueryDTO) {
+        ResultData<${className}VO> resultData = ${classname}Service.selectOne(${classname}QueryDTO);
         return resultData;
     }
 

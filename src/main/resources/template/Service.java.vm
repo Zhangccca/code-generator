@@ -25,6 +25,8 @@ public interface ${className}Service {
 
     ResultData<${className}VO> selectById(Long id);
 
+    ResultData<${className}VO> selectOne(${className}QueryDTO ${classname}QueryDTO);
+
     ResultData<Integer> insert(${className}InsertDTO ${classname}InsertDTO);
 
     ResultData<Integer> insertSelective(${className}InsertDTO ${classname}InsertDTO);

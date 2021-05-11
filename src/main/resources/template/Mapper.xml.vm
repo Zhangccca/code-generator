@@ -131,6 +131,14 @@
     </select>
 
 
+    <select id="selectOne" resultMap="${classname}VoMap">
+        SELECT
+        <include refid="columns" />
+        FROM $tableName
+        <include refid="findPage_where"/>
+    </select>
+
+
 	<update id="updateById" >
         UPDATE  $tableName
         <include refid="update_sql" />
