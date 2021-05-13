@@ -122,6 +122,13 @@
         </if>
     </select>
 
+    <select id="findConut">
+        SELECT
+        count(1)
+        FROM $tableName
+        <include refid="findPage_where"/>
+    </select>
+
     <select id="selectById" resultMap="${classname}VoMap">
         SELECT
         <include refid="columns" />

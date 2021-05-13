@@ -21,6 +21,8 @@ public interface ${className}Service {
 
     ResultData<List<${className}VO>> findList(${className}QueryDTO ${classname}QueryDTO);
 
+    ResultData<Integer> findConut(${className}QueryDTO ${classname}QueryDTO);
+
     ResultData<List<${className}VO>> findListForPage(${className}QueryDTO ${classname}QueryDTO);
 
     ResultData<${className}VO> selectById(Long id);

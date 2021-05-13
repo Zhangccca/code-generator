@@ -48,6 +48,17 @@ public class ${className}Controller {
         return resultData;
     }
 
+
+    /**
+   * 列表查询
+   */
+    @ApiOperation(value = "数量查询")
+    @RequestMapping(value = "/conut", method = RequestMethod.GET)
+    public ResultData<List<${className}VO>> findConut(${className}QueryDTO ${classname}QueryDTO) {
+        ResultData<Integer> resultData = ${classname}Service.findConut(${classname}QueryDTO);
+        return resultData;
+    }
+
     /**
     * 分页查询
     */

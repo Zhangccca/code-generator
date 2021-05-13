@@ -19,6 +19,8 @@ public interface ${className}Mapper {
 
     List<TemplateCodeGenVO> findList(${className}QueryDTO ${classname}QueryDTO);
 
+    int findConut(${className}QueryDTO ${classname}QueryDTO);
+
     List<${className}VO> findListForPage(${className}QueryDTO ${classname}QueryDTO);
 
     ${className}VO selectById(Long id);

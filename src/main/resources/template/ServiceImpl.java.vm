@@ -31,6 +31,12 @@ public class ${className}ServiceImpl  implements ${className}Service {
     }
 
     @Override
+    public ResultData<Integer> findConut(${className}QueryDTO ${classname}QueryDTO) {
+        Integer count = ${classname}Mapper.findConut(${classname}QueryDTO);
+        return ResultData.success("", count);
+    }
+
+    @Override
     public ResultData<List<${className}VO>> findListForPage(${className}QueryDTO ${classname}QueryDTO) {
         List<${className}VO> list = ${classname}Mapper.findListForPage(${classname}QueryDTO);
         return ResultData.success("", list);
