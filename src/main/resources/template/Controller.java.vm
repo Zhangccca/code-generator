@@ -7,8 +7,8 @@ import ${package}.${moduleName}.dto.${className}UpdateDTO;
 import ${package}.${moduleName}.dto.${className}QueryDTO;
 import ${package}.${moduleName}.vo.${className}VO;
 import ${package}.service.${moduleName}.${className}Service;
-import com.shebao.framework.util.page.PageParamVo;
 import com.shebao.framework.util.bean.ResultData;
+import com.shebao.framework.util.page.PageRequest;
 import com.shebao.framework.util.page.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +41,8 @@ public class ${className}Controller {
     * 列表查询
     */
     @ApiOperation(value = "列表查询")
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResultData<List<${className}VO>> list(${className}QueryDTO ${classname}QueryDTO) {
-        ${classname}QueryDTO.setOrderByField(PageParamVo.concatOrderBy(${classname}QueryDTO.getAscs(),${classname}QueryDTO.getDescs()));
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public ResultData<List<${className}VO>> list(@RequestBody ${className}QueryDTO ${classname}QueryDTO) {
         ResultData<List<${className}VO>> resultData = ${classname}Service.findList(${classname}QueryDTO);
         return resultData;
     }
@@ -54,7 +53,7 @@ public class ${className}Controller {
    */
     @ApiOperation(value = "数量查询")
     @RequestMapping(value = "/conut", method = RequestMethod.GET)
-    public ResultData<List<${className}VO>> findConut(${className}QueryDTO ${classname}QueryDTO) {
+    public ResultData<Integer> findConut(${className}QueryDTO ${classname}QueryDTO) {
         ResultData<Integer> resultData = ${classname}Service.findConut(${classname}QueryDTO);
         return resultData;
     }
@@ -63,10 +62,9 @@ public class ${className}Controller {
     * 分页查询
     */
     @ApiOperation(value = "分页查询")
-    @RequestMapping(value = "/pageList", method = RequestMethod.GET)
-    public ResultData<Pagination<${className}VO>> pageList(${className}QueryDTO ${classname}QueryDTO) {
-        ${classname}QueryDTO.setOrderByField(PageParamVo.concatOrderBy(${classname}QueryDTO.getAscs(),${classname}QueryDTO.getDescs()));
-        ResultData<List<${className}VO>> resultData = ${classname}Service.findListForPage(${classname}QueryDTO);
+    @RequestMapping(value = "/pageList", method = RequestMethod.POST)
+    public ResultData<Pagination<${className}VO>> pageList(@RequestBody PageRequest<${className}QueryDTO> pageRequest) {
+        ResultData<List<${className}VO>> resultData = ${classname}Service.findListForPage(pageRequest.getData());
         Pagination<${className}VO> pagination = new Pagination<>();
         pagination.setList(resultData.getData());
         return ResultData.success("成功", pagination);
