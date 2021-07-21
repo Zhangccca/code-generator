@@ -17,9 +17,6 @@ import java.util.List;
  */
 public interface ${className}Mapper {
 
-    List<TemplateCodeGenVO> findList(${className}QueryDTO ${classname}QueryDTO);
-
-    int findConut(${className}QueryDTO ${classname}QueryDTO);
 
     List<${className}VO> queryListForPage(${className}QueryDTO ${classname}QueryDTO);
 
@@ -32,6 +29,8 @@ public interface ${className}Mapper {
     Integer updateById(${className} ${classname});
 
     Integer deleteById(Long id);
+
+    int queryCount(${className}QueryDTO ${classname}QueryDTO);
 
 
 }
