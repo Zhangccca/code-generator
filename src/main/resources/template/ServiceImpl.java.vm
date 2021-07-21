@@ -70,8 +70,8 @@ public class ${className}ServiceImpl  implements ${className}Service {
     }
 
     @Override
-    public ResultData<Integer> queryConut(${className}QueryDTO ${classname}QueryDTO) {
-        Integer count = ${classname}Mapper.queryConut(${classname}QueryDTO);
+    public ResultData<Integer> queryCount(${className}QueryDTO ${classname}QueryDTO) {
+        Integer count = ${classname}Mapper.queryCount(${classname}QueryDTO);
         return ResultData.success("", count);
     }
 }
