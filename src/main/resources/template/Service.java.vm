@@ -19,15 +19,12 @@ import java.util.List;
  */
 public interface ${className}Service {
 
-    ResultData<List<${className}VO>> findList(${className}QueryDTO ${classname}QueryDTO);
 
-    ResultData<Integer> findConut(${className}QueryDTO ${classname}QueryDTO);
 
-    ResultData<List<${className}VO>> findListForPage(${className}QueryDTO ${classname}QueryDTO);
 
-    ResultData<${className}VO> selectById(Long id);
+    ResultData<List<${className}VO>> queryListForPage(${className}QueryDTO ${classname}QueryDTO);
 
-    ResultData<${className}VO> selectOne(${className}QueryDTO ${classname}QueryDTO);
+    ResultData<${className}VO> queryInfo(${className}QueryDTO ${classname}QueryDTO);
 
     ResultData<Integer> insert(${className}InsertDTO ${classname}InsertDTO);
 
@@ -36,6 +33,8 @@ public interface ${className}Service {
     ResultData<Integer> updateById(${className}UpdateDTO ${classname}UpdateDTO);
 
     ResultData<Integer> deleteById(Long id);
+
+    ResultData<Integer> queryCount(${className}QueryDTO ${classname}QueryDTO);
 
 
 }

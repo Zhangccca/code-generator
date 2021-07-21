@@ -102,37 +102,23 @@
        </set>
     </sql>
 
-    <select id="findList" resultMap="${classname}VoMap">
-		SELECT
-		<include refid="columns" />
-		FROM $tableName
-		<include refid="findPage_where"/>
-	</select>
 
-    <select id="findListForPage" resultMap="${classname}VoMap">
+    <select id="queryListForPage" resultMap="${classname}VoMap">
         SELECT
         <include refid="columns" />
         FROM $tableName
         <include refid="findPage_where"/>
     </select>
 
-    <select id="findConut">
+    <select id="queryCount">
         SELECT
         count(1)
         FROM $tableName
         <include refid="findPage_where"/>
     </select>
 
-    <select id="selectById" resultMap="${classname}VoMap">
-        SELECT
-        <include refid="columns" />
-        FROM $tableName
-        WHERE
-        $pk.columnName = #{$pk.attrname}
-    </select>
 
-
-    <select id="selectOne" resultMap="${classname}VoMap">
+    <select id="queryInfo" resultMap="${classname}VoMap">
         SELECT
         <include refid="columns" />
         FROM $tableName

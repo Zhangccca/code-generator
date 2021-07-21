@@ -24,33 +24,18 @@ public class ${className}ServiceImpl  implements ${className}Service {
     @Autowired
     ${className}Mapper ${classname}Mapper;
 
+
+
+
     @Override
-    public ResultData<List<${className}VO>> findList(${className}QueryDTO ${classname}QueryDTO) {
-        List<${className}VO> list = ${classname}Mapper.findList(${classname}QueryDTO);
+    public ResultData<List<${className}VO>> queryListForPage(${className}QueryDTO ${classname}QueryDTO) {
+        List<${className}VO> list = ${classname}Mapper.queryListForPage(${classname}QueryDTO);
         return ResultData.success("", list);
     }
 
     @Override
-    public ResultData<Integer> findConut(${className}QueryDTO ${classname}QueryDTO) {
-        Integer count = ${classname}Mapper.findConut(${classname}QueryDTO);
-        return ResultData.success("", count);
-    }
-
-    @Override
-    public ResultData<List<${className}VO>> findListForPage(${className}QueryDTO ${classname}QueryDTO) {
-        List<${className}VO> list = ${classname}Mapper.findListForPage(${classname}QueryDTO);
-        return ResultData.success("", list);
-    }
-
-    @Override
-    public ResultData<${className}VO> selectById(Long id) {
-        ${className}VO ${classname}VO = ${classname}Mapper.selectById(id);
-        return ResultData.success("", ${classname}VO);
-    }
-
-    @Override
-    public ResultData<${className}VO> selectOne(${className}QueryDTO ${classname}QueryDTO) {
-            ${className}VO ${classname}VO = ${classname}Mapper.selectOne(${classname}QueryDTO);
+    public ResultData<${className}VO> queryInfo(${className}QueryDTO ${classname}QueryDTO) {
+            ${className}VO ${classname}VO = ${classname}Mapper.queryInfo(${classname}QueryDTO);
         return ResultData.success("", ${classname}VO);
     }
 
@@ -82,5 +67,11 @@ public class ${className}ServiceImpl  implements ${className}Service {
     public ResultData<Integer> deleteById(Long id) {
         Integer delete =${classname}Mapper.deleteById(id);
         return ResultData.success("", delete);
+    }
+
+    @Override
+    public ResultData<Integer> queryConut(${className}QueryDTO ${classname}QueryDTO) {
+        Integer count = ${classname}Mapper.queryConut(${classname}QueryDTO);
+        return ResultData.success("", count);
     }
 }

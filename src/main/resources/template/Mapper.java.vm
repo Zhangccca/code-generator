@@ -21,11 +21,9 @@ public interface ${className}Mapper {
 
     int findConut(${className}QueryDTO ${classname}QueryDTO);
 
-    List<${className}VO> findListForPage(${className}QueryDTO ${classname}QueryDTO);
+    List<${className}VO> queryListForPage(${className}QueryDTO ${classname}QueryDTO);
 
-    ${className}VO selectById(Long id);
-
-    ${className}VO selectOne(${className}QueryDTO ${classname}QueryDTO);
+    ${className}VO queryInfo(${className}QueryDTO ${classname}QueryDTO);
 
     Integer insert(${className} ${classname});
 
