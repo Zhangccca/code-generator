@@ -79,23 +79,13 @@ public class ${className}Controller {
         return resultData;
     }
 
-    /**
-     * 删除
-     */
-    @ApiOperation(value = "删除")
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResultData<Integer> delete(Long id) {
-        ResultData<Integer> resultData = ${classname}Service.deleteById(id);
-        return resultData;
-    }
-
 
     /**
    * 数量查询
    */
     @ApiOperation(value = "数量查询")
-    @RequestMapping(value = "/count", method = RequestMethod.GET)
-    public ResultData<Integer> queryCount(${className}QueryDTO ${classname}QueryDTO) {
+    @RequestMapping(value = "/count", method = RequestMethod.POST)
+    public ResultData<Integer> queryCount(@RequestBody ${className}QueryDTO ${classname}QueryDTO) {
         ResultData<Integer> resultData = ${classname}Service.queryCount(${classname}QueryDTO);
         return resultData;
     }
