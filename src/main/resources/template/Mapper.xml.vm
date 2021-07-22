@@ -132,11 +132,4 @@
         WHERE
 		$pk.columnName = #{$pk.attrname}
 	</update>
-
-    <update id="deleteById">
-		UPDATE $tableName SET
-        is_delete = 1
-		WHERE
-		$pk.columnName = #{$pk.attrname}
-	</update>
 </mapper>

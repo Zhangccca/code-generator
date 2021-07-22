@@ -28,8 +28,6 @@ public interface ${className}Mapper {
 
     Integer updateById(${className} ${classname});
 
-    Integer deleteById(Long id);
-
     int queryCount(${className}QueryDTO ${classname}QueryDTO);
 
 

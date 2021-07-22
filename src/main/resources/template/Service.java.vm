@@ -32,8 +32,6 @@ public interface ${className}Service {
 
     ResultData<Integer> updateById(${className}UpdateDTO ${classname}UpdateDTO);
 
-    ResultData<Integer> deleteById(Long id);
-
     ResultData<Integer> queryCount(${className}QueryDTO ${classname}QueryDTO);
 
 

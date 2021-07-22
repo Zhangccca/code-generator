@@ -63,11 +63,6 @@ public class ${className}ServiceImpl  implements ${className}Service {
         return ResultData.success("", update);
     }
 
-    @Override
-    public ResultData<Integer> deleteById(Long id) {
-        Integer delete =${classname}Mapper.deleteById(id);
-        return ResultData.success("", delete);
-    }
 
     @Override
     public ResultData<Integer> queryCount(${className}QueryDTO ${classname}QueryDTO) {
