@@ -28,7 +28,7 @@ public interface ${className}Mapper {
 
     Integer updateById(${className} ${classname});
 
-    int queryCount(${className}QueryDTO ${classname}QueryDTO);
+    Integer queryCount(${className}QueryDTO ${classname}QueryDTO);
 
 
 }
