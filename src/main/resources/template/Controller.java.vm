@@ -95,7 +95,7 @@ public class ${className}Controller {
    */
     @ApiOperation(value = "数量查询")
     @RequestMapping(value = "/count", method = RequestMethod.GET)
-    public ResultData<Integer> findConut(${className}QueryDTO ${classname}QueryDTO) {
+    public ResultData<Integer> queryCount(${className}QueryDTO ${classname}QueryDTO) {
         ResultData<Integer> resultData = ${classname}Service.queryCount(${classname}QueryDTO);
         return resultData;
     }
