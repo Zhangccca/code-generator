@@ -53,7 +53,7 @@ public class ${className}Controller {
 
 
     @ApiOperation(value = "查询单个-根据动态参数")
-    @RequestMapping(value = "/info", method = RequestMethod.POST)
+    @RequestMapping(value = "/queryDetailInfo", method = RequestMethod.POST)
     public ResultData<${className}VO> selectOne(@RequestBody ${className}QueryDTO ${classname}QueryDTO) {
         ResultData<${className}VO> resultData = ${classname}Service.queryInfo(${classname}QueryDTO);
         return resultData;
@@ -63,7 +63,7 @@ public class ${className}Controller {
      * 保存
      */
     @ApiOperation(value = "保存")
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResultData<Integer> save(@RequestBody ${className}InsertDTO ${classname}InsertDTO) {
         ResultData<Integer> resultData = ${classname}Service.insertSelective(${classname}InsertDTO);
         return resultData;
