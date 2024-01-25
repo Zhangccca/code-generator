@@ -9,11 +9,11 @@ server:
 # mysql
 spring:
     datasource:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: com.mysql.jdbc.Driver
-        url: jdbc:mysql://rm-2ze5y2680283kde34.mysql.rds.aliyuncs.com/shebao_dispatch_personnel?
-        username: p_personnel_ws
-        password: GBmB7Yhn29q0mE1z
+#        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://172.19.20.5:3306/zhangchi?serverTimezone=UTC&useSSL=false
+        username: zhangchi
+        password: 123456
     jackson:
         time-zone: GMT+8
         date-format: yyyy-MM-dd HH:mm:ss

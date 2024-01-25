@@ -1,7 +1,6 @@
 package ${package}.controller.${moduleName};
 
 
-
 import ${package}.${moduleName}.dto.${className}InsertDTO;
 import ${package}.${moduleName}.dto.${className}UpdateDTO;
 import ${package}.${moduleName}.dto.${className}QueryDTO;
@@ -17,7 +16,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-
 
 
 /**
@@ -36,8 +34,6 @@ public class ${className}Controller {
     private ${className}Service ${classname}Service;
 
 
-
-
     /**
     * 分页查询
     */
@@ -49,7 +45,6 @@ public class ${className}Controller {
         pagination.setList(resultData.getData());
         return ResultData.success("成功", pagination);
     }
-
 
 
     @ApiOperation(value = "查询单个-根据动态参数")

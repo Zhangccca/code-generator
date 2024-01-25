@@ -12,20 +12,20 @@ import java.util.Date;
 
 /**
  * ${comments}
- * 
+ *
  * @author ${author}
  * @email ${email}
  * @date ${datetime}
  */
 @Data
-public class ${className}InsertDTO{
+public class ${className}InsertDTO {
 
-#foreach ($column in $notPkColumns)
-/**
- * $column.comments
- */
-@ApiModelProperty("$column.comments")
-private $column.attrType $column.attrname;
-#end
+    #foreach ($column in $notPkColumns)
+        /**
+         * $column.comments
+         */
+        @ApiModelProperty("$column.comments")
+        private $column.attrType $column.attrname;
+    #end
 
 }

@@ -12,20 +12,20 @@ import java.util.Date;
 
 /**
  * ${comments}
- * 
+ *
  * @author ${author}
  * @email ${email}
  * @date ${datetime}
  */
 @Data
-public class ${className}QueryDTO{
+public class ${className}QueryDTO {
 
-#foreach ($column in $columns)
-/**
- * $column.comments
- */
-@ApiModelProperty("$column.comments")
-private $column.attrType $column.attrname;
-#end
+    #foreach ($column in $columns)
+        /**
+         * $column.comments
+         */
+        @ApiModelProperty("$column.comments")
+        private $column.attrType $column.attrname;
+    #end
 
 }

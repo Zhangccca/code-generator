@@ -6,8 +6,8 @@ import java.util.Map;
 /**
  * 代码生成器
  * 
- * @author chutong
- * @email chutong@51shebao.com
+ * @author zhangyaoyao
+ * @email yoyo_jang@qq.com
  * @date 2021年04月07日
  */
 public interface SysGeneratorDao {

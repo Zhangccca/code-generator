@@ -23,8 +23,8 @@ import java.util.zip.ZipOutputStream;
 /**
  * 代码生成器 工具类
  *
- * @author chutong
- * @email chutong@51shebao.com
+ * @author zhangyaoyao
+ * @email yoyo_jang@qq.com
  * @date 2021年04月07日
  */
 public class GenUtils {
@@ -51,7 +51,7 @@ public class GenUtils {
      * 生成代码
      */
     public static void generatorCode(Map<String, String> table, List<Map<String, String>> columns,
-            ZipOutputStream zip) {
+                                     ZipOutputStream zip) {
         // 配置信息
         Configuration config = getConfig();
         boolean hasBigDecimal = false;
@@ -171,7 +171,7 @@ public class GenUtils {
      * 列名转换成Java属性名
      */
     public static String columnToJava(String columnName) {
-        return WordUtils.capitalizeFully(columnName, new char[] {'_'}).replace("_", "");
+        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
     }
 
     /**
@@ -179,7 +179,7 @@ public class GenUtils {
      */
     public static String tableToJava(String tableName, String tablePrefix) {
         if (StringUtils.isNotBlank(tablePrefix)) {
-            if(tableName.startsWith(tablePrefix)){
+            if (tableName.startsWith(tablePrefix)) {
                 int length = tablePrefix.length();
                 tableName = tableName.substring(length);
             }
@@ -203,7 +203,7 @@ public class GenUtils {
      * 获取文件名
      */
     public static String getFileName(String template, String className, String packageName,
-            String moduleName) {
+                                     String moduleName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator + moduleName

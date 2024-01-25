@@ -1,5 +1,6 @@
 package ${package}.${moduleName}.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 #if(${hasBigDecimal})
@@ -11,19 +12,20 @@ import java.util.Date;
 
 /**
  * ${comments}
- * 
+ *
  * @author ${author}
  * @email ${email}
  * @date ${datetime}
  */
 @Data
-public class ${className}{
+public class ${className} {
 
-#foreach ($column in $columns)
-/**
- * $column.comments
- */
-private $column.attrType $column.attrname;
-#end
+    #foreach ($column in $columns)
+    /**
+     * $column.comments
+     */
+    @ApiModelProperty("$column.comments")
+    private $column.attrType $column.attrname;
+    #end
 
 }

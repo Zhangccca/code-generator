@@ -1,0 +1,120 @@
+package ${package}.service;
+
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import win.trust.door.model.base.DataWithPagination;
+import win.trust.door.model.base.PageRequest;
+import win.trust.door.model.base.ResultData;
+
+import ${package}.model.${className}.request.${className}AddRequest;
+import ${package}.model.${className}.request.${className}UpdateRequest;
+
+import ${package}.${moduleName}.dto.${className}QueryDTO;
+import ${package}.${moduleName}.model.${className};
+import ${package}.${moduleName}.dto.${className}InsertDTO;
+import ${package}.${moduleName}.dto.${className}UpdateDTO;
+import ${package}.${moduleName}.vo.${className}VO;
+
+import java.util.List;
+
+/**
+ * Created by Intellij IDEA.
+ *
+ * @author: zhangchi
+ * @date: 2024/1/11 15:17
+ * @description:
+ */
+@Service
+@Component
+public class Handle${className}Service {
+    @Autowired
+    private I${className}Service ${classname}Service;
+
+    public DataWithPagination<${className}> getList(PageRequest<${className}QueryDTO> pageRequest) {
+        DataWithPagination<${className}> dataWithPagination = new DataWithPagination<>();
+        int pageNo = pageRequest.getPageNo();
+        int pageSize = pageRequest.getPageSize();
+        dataWithPagination.setPageNo(pageNo);
+        dataWithPagination.setPageSize(pageSize);
+
+        List<${className}> list;
+        ${className} info = new ${className}();
+        if (ObjectUtils.isNotEmpty(pageRequest.getData())) {
+            BeanUtils.copyProperties(pageRequest.getData(), info);
+        }
+        // 计算偏移量（从第几页开始）
+        Integer offset = (pageNo - 1) * pageSize;
+        list = ${classname}Service.selectListByPage(info, offset, pageSize);
+        if (ObjectUtils.isEmpty(list)) {
+            return dataWithPagination;
+        }
+        dataWithPagination.setList(list);
+        //查询总数
+        ${className}QueryDTO dto = new ${className}QueryDTO();
+        BeanUtils.copyProperties(info, dto);
+        int totalCount = ${classname}Service.queryCount(dto);
+        dataWithPagination.setTotalCount(totalCount);
+        //计算totalPage
+        int totalPage = (int) Math.ceil(NumberUtils.DOUBLE_ONE * totalCount / pageSize);
+        dataWithPagination.setTotalPage(totalPage);
+        return dataWithPagination;
+    }
+
+    public ResultData<Integer> ${classname}Add(${className}AddRequest request) {
+        ${className}QueryDTO queryDTO = new ${className}QueryDTO();
+        BeanUtils.copyProperties(request, queryDTO);
+        ${className}VO vo = ${classname}Service.queryInfo(queryDTO);
+        if (ObjectUtils.isNotEmpty(vo)) {
+            return ResultData.error("名称已存在");
+        }
+        ${className} ${classname} = new ${className}();
+        BeanUtils.copyProperties(request, ${classname});
+        return ResultData.success(${classname}Service.insertSelective(${classname}));
+    }
+
+    public ResultData ${classname}(Integer id) {
+        ${className}QueryDTO queryDTO = new ${className}QueryDTO();
+        queryDTO.setId(id);
+        ${className}VO vo = ${classname}Service.queryInfo(queryDTO);
+        return ResultData.success(vo);
+    }
+
+    public ResultData ${classname}Edit(${className}UpdateRequest request) {
+        boolean exist = verify${classname}ExistById(request.getId());
+        if (!exist) {
+            return ResultData.error("不存在");
+        }
+        if (ObjectUtils.isNotEmpty(request.getName()) && verify${classname}NameExist(request.getName())) {
+            return ResultData.error("名称已存在");
+        }
+        ${className} info = new ${className}();
+        BeanUtils.copyProperties(request, info);
+        Integer result = ${classname}Service.updateById(info);
+        return ResultData.success(result);
+    }
+
+    private boolean verify${classname}ExistById(Integer id) {
+        ${className}QueryDTO queryDTO = new ${className}QueryDTO();
+        queryDTO.setId(id);
+        ${className}VO vo = ${classname}Service.queryInfo(queryDTO);
+        if (ObjectUtils.isEmpty(vo)) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean verify${classname}NameExist(String name) {
+        ${className}QueryDTO queryDTO = new ${className}QueryDTO();
+        queryDTO.setName(name);
+        ${className}VO vo = ${classname}Service.queryInfo(queryDTO);
+        if (ObjectUtils.isEmpty(vo)) {
+            return false;
+        }
+        return true;
+    }
+
+}

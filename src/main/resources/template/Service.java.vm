@@ -1,11 +1,11 @@
 package ${package}.service.${moduleName};
 
+import org.apache.ibatis.annotations.Param;
 import ${package}.${moduleName}.dto.${className}QueryDTO;
 import ${package}.${moduleName}.dto.${className}InsertDTO;
 import ${package}.${moduleName}.dto.${className}UpdateDTO;
 import ${package}.${moduleName}.vo.${className}VO;
 import com.shebao.framework.util.page.PageRequest;
-import com.shebao.framework.util.bean.ResultData;
 
 import java.util.List;
 
@@ -20,20 +20,61 @@ import java.util.List;
 public interface ${className}Service {
 
 
+    /**
+     * 分页获取 ${className} 列表
+     *
+     * @param ${classname}QueryDTO
+     * @return
+     */
+    List<${className}VO> queryListForPage(${className}QueryDTO ${classname}QueryDTO);
+
+    /**
+     * 查询 ${className} 详情
+     *
+     * @param ${classname}QueryDTO
+     * @return
+     */
+    ${className}VO queryInfo(${className}QueryDTO ${classname}QueryDTO);
+
+    /**
+     * 新增 ${className} 数据
+     *
+     * @param ${classname}InsertDTO
+     * @return
+     */
+    Integer insert(${className}InsertDTO ${classname}InsertDTO);
+
+    /**
+     *  动态条件插入 ${className} 数据
+     *
+     * @param ${classname}InsertDTO
+     * @return
+     */
+    Integer insertSelective(${className}InsertDTO ${classname}InsertDTO);
+
+    /**
+     * 根据主键id更新 ${className} 数据
+     *
+     * @param ${classname}UpdateDTO
+     * @return
+     */
+    Integer updateById(${className}UpdateDTO ${classname}UpdateDTO);
+
+    /**
+     * 根据条件查询 ${className} 数据总数
+     *
+     * @param ${classname}QueryDTO
+     * @return
+     */
+    Integer queryCount(${className}QueryDTO ${classname}QueryDTO);
 
 
-    ResultData<List<${className}VO>> queryListForPage(${className}QueryDTO ${classname}QueryDTO);
-
-    ResultData<${className}VO> queryInfo(${className}QueryDTO ${classname}QueryDTO);
-
-    ResultData<Integer> insert(${className}InsertDTO ${classname}InsertDTO);
-
-    ResultData<Integer> insertSelective(${className}InsertDTO ${classname}InsertDTO);
-
-    ResultData<Integer> updateById(${className}UpdateDTO ${classname}UpdateDTO);
-
-    ResultData<Integer> queryCount(${className}QueryDTO ${classname}QueryDTO);
-
+    /**
+     * 分页筛选 ${className} 列表
+     *
+     * @return
+     */
+    List<${className}> selectListByPage(@Param("info") ${className} ${classname}, @Param("offset") Integer offset, @Param("limit") Integer limit);
 
 }
 

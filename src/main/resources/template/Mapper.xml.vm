@@ -5,7 +5,7 @@
 
     <resultMap type="${package}.${moduleName}.entity.${className}" id="${classname}Map">
         #foreach($column in $columns)
-                <result property="${column.attrname}" column="${column.columnName}"/>
+            <result property="${column.attrname}" column="${column.columnName}"/>
         #end
     </resultMap>
 
@@ -17,95 +17,95 @@
 
 
     <!-- 用于select查询公用抽取的列 -->
-	<sql id="columns">
+    <sql id="columns">
         <![CDATA[
-        #foreach($column in $columns)
-            ${column.columnName}#if($velocityHasNext),#end
-        #end
+            #foreach($column in $columns)
+                ${column.columnName}#if($velocityHasNext),#end
+            #end
         ]]>
 	</sql>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="$pk.columnName">
         <![CDATA[
-            INSERT INTO $tableName (
+        INSERT INTO $tableName (
             #foreach($column in $columns)
                 $column.columnName#if($velocityHasNext),#end
             #end
-            ) VALUES (
+        ) VALUES (
             #foreach($column in $columns)
-                #{$column.attrname}#if($velocityHasNext),#end
-            #end
+                    #{$column.attrname}#if($velocityHasNext),#end
+                #end
             )
         ]]>
     </insert>
 
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="$pk.columnName">
         INSERT INTO $tableName
-            <trim prefix="(" suffix=")" suffixOverrides=",">
-                #foreach($column in $columns)
-                    #if($column.attrType=='String')
-                        <if test="$column.attrname != null and $column.attrname != ''">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #foreach($column in $columns)
+                #if($column.attrType=='String')
+                    <if test="$column.attrname != null and $column.attrname != ''">
                         $column.columnName#if($velocityHasNext),#end
-                        </if>
-                    #else
-                        <if test="$column.attrname != null">
+                    </if>
+                #else
+                    <if test="$column.attrname != null">
                         $column.columnName#if($velocityHasNext),#end
-                        </if>
-                    #end
+                    </if>
                 #end
-            </trim>
-            <trim prefix="values (" suffix=")" suffixOverrides=",">
-                #foreach($column in $columns)
-                        #if($column.attrType=='String')
-                        <if test="$column.attrname != null and $column.attrname != ''">
+            #end
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #foreach($column in $columns)
+                #if($column.attrType=='String')
+                    <if test="$column.attrname != null and $column.attrname != ''">
                         #{$column.attrname}#if($velocityHasNext),#end
-                        </if>
-                    #else
-                        <if test="$column.attrname != null">
+                    </if>
+                #else
+                    <if test="$column.attrname != null">
                         #{$column.attrname}#if($velocityHasNext),#end
-                        </if>
-                    #end
+                    </if>
                 #end
+            #end
         </trim>
     </insert>
 
-	<sql id="findPage_where">
-		<where>
-			#foreach($column in $columns)
-				#if($column.attrType=='String')
-					 <if test="$column.attrname != null and $column.attrname != ''">
-					  	AND $column.columnName = #{$column.attrname}
-			  		 </if>
-			   #else
-			   		 <if test="$column.attrname != null">
-			    		AND $column.columnName=#{$column.attrname}
-			    	 </if>
-			   #end
-			#end
-		</where>
-	</sql>
+    <sql id="findPage_where">
+        <where>
+            #foreach($column in $columns)
+                #if($column.attrType=='String')
+                    <if test="$column.attrname != null and $column.attrname != ''">
+                        AND $column.columnName = #{$column.attrname}
+                    </if>
+                #else
+                    <if test="$column.attrname != null">
+                        AND $column.columnName=#{$column.attrname}
+                    </if>
+                #end
+            #end
+        </where>
+    </sql>
 
 
-	  <sql id="update_sql">
-         <set>
-          #foreach($column in $notPkColumns)
-          	#if($column.attrType=='String')
-		    	 <if test="$column.attrname != null and $column.attrname != ''">
-		    	 $column.columnName=#{$column.attrname} #if($velocityHasNext),#end
-		    	 </if>
-	    	 #else
-	    	 	 <if test="$column.attrname != null">
-		    	 $column.columnName=#{$column.attrname} #if($velocityHasNext),#end
-		    	 </if>
-	    	#end
-	      #end
-       </set>
+    <sql id="update_sql">
+        <set>
+            #foreach($column in $notPkColumns)
+                #if($column.attrType=='String')
+                    <if test="$column.attrname != null and $column.attrname != ''">
+                        $column.columnName=#{$column.attrname} #if($velocityHasNext),#end
+                    </if>
+                #else
+                    <if test="$column.attrname != null">
+                        $column.columnName=#{$column.attrname} #if($velocityHasNext),#end
+                    </if>
+                #end
+            #end
+        </set>
     </sql>
 
 
     <select id="queryListForPage" resultMap="${classname}VoMap">
         SELECT
-        <include refid="columns" />
+        <include refid="columns"/>
         FROM $tableName
         <include refid="findPage_where"/>
     </select>
@@ -120,16 +120,47 @@
 
     <select id="queryInfo" resultMap="${classname}VoMap">
         SELECT
-        <include refid="columns" />
+        <include refid="columns"/>
         FROM $tableName
         <include refid="findPage_where"/>
     </select>
 
 
-	<update id="updateById" >
+    <update id="updateById">
         UPDATE  $tableName
-        <include refid="update_sql" />
+        <include refid="update_sql"/>
         WHERE
-		$pk.columnName = #{$pk.attrname}
-	</update>
+        $pk.columnName = #{$pk.attrname}
+    </update>
+
+
+    <select id="selectListByPage" parameterType="${package}.${moduleName}.entity.${className}"
+            resultMap="${classname}Map"
+    >
+        select <include refid="columns"/>
+        FROM $tableName
+        <where>
+            1=1
+            <include refid="findPage_where"/>
+        </where>
+        ORDER BY update_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <update id="updateByPrimaryKeySelective" parameterType="${package}.${moduleName}.entity.${className}">
+        update  $tableName
+        <include refid="update_sql"/>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="batchDeleteByPrimaryKey" parameterType="java.util.List">
+        update $tableName set is_delete=1
+        <if test="ids != null and ids.size!=0">
+            where id in
+            <foreach collection="ids" item="itemId" open="(" close=")"
+                     separator=",">
+                #{itemId}
+            </foreach>
+        </if>
+    </update>
 </mapper>

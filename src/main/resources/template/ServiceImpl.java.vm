@@ -8,7 +8,6 @@ import ${package}.${moduleName}.vo.${className}VO;
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.mapper.${className}Mapper;
 import ${package}.service.${moduleName}.${className}Service;
-import com.shebao.framework.util.bean.ResultData;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,54 +18,51 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ${className}ServiceImpl  implements ${className}Service {
+public class ${className}ServiceImpl implements ${className}Service {
 
     @Autowired
-    ${className}Mapper ${classname}Mapper;
-
-
+        ${className}Mapper ${classname}Mapper;
 
 
     @Override
-    public ResultData<List<${className}VO>> queryListForPage(${className}QueryDTO ${classname}QueryDTO) {
-        List<${className}VO> list = ${classname}Mapper.queryListForPage(${classname}QueryDTO);
-        return ResultData.success("", list);
+    public List<${className}VO> queryListForPage(${className}QueryDTO ${classname}QueryDTO) {
+        return ${classname}Mapper.queryListForPage(${classname}QueryDTO);
     }
 
     @Override
-    public ResultData<${className}VO> queryInfo(${className}QueryDTO ${classname}QueryDTO) {
-            ${className}VO ${classname}VO = ${classname}Mapper.queryInfo(${classname}QueryDTO);
-        return ResultData.success("", ${classname}VO);
+    public ${className}VO queryInfo(${className}QueryDTO ${classname}QueryDTO) {
+        return ${classname}Mapper.queryInfo(${classname}QueryDTO);
     }
 
     @Override
-    public ResultData<Integer> insert(${className}InsertDTO ${classname}InsertDTO) {
-        ${className} ${classname} = new ${className}();
+    public Integer insert(${className}InsertDTO ${classname}InsertDTO) {
+        ${className} ${classname} =new ${className}();
         BeanUtils.copyProperties(${classname}InsertDTO, ${classname});
-        Integer insert =  ${classname}Mapper.insert(${classname});
-        return ResultData.success("", insert);
+        return ${classname}Mapper.insert(${classname});
     }
 
     @Override
-    public ResultData<Integer> insertSelective(${className}InsertDTO ${classname}InsertDTO) {
-        ${className} ${classname} = new ${className}();
+    public Integer insertSelective(${className}InsertDTO ${classname}InsertDTO) {
+        ${className} ${classname} =new ${className}();
         BeanUtils.copyProperties(${classname}InsertDTO, ${classname});
-        Integer insert =${classname}Mapper.insertSelective(${classname});
-        return ResultData.success("", insert);
+        return ${classname}Mapper.insertSelective(${classname});
     }
 
     @Override
-    public ResultData<Integer> updateById(${className}UpdateDTO ${classname}UpdateDTO) {
-        ${className} ${classname} = new ${className}();
+    public Integer updateById(${className}UpdateDTO ${classname}UpdateDTO) {
+        ${className} ${classname} =new ${className}();
         BeanUtils.copyProperties(${classname}UpdateDTO, ${classname});
-        Integer update =${classname}Mapper.updateById(${classname});
-        return ResultData.success("", update);
+        return ${classname}Mapper.updateById(${classname});
     }
 
 
     @Override
-    public ResultData<Integer> queryCount(${className}QueryDTO ${classname}QueryDTO) {
-        Integer count = ${classname}Mapper.queryCount(${classname}QueryDTO);
-        return ResultData.success("", count);
+    public Integer queryCount(${className}QueryDTO ${classname}QueryDTO) {
+        return ${classname}Mapper.queryCount(${classname}QueryDTO);
+    }
+
+    @Override
+    public List<${className}> selectListByPage(${className} info, Integer offset, Integer limit) {
+        return ${classname}Mapper.selectListByPage(info, offset, limit);
     }
 }

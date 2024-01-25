@@ -1,7 +1,14 @@
 # code-generator
 
-代码生成器，此生成器能够生成Entity,DTO,VO,Mapper,Service,Controller一整套
-可执行的CRUD代码，此套代码可以规范Java接口建设。如有新加的接口，则其功能不能重复
+Code generator.
+
+This generator can generate a complete set of Entity, DTO, VO, Mapper, Service, and Controller.
+
+Executable CRUD code, this set of code can standardize Java interface construction.
+
+If there is a new interface added, its function cannot be duplicated.
+
+***
 
 ### generator.properties说明
 
@@ -16,6 +23,14 @@
 ### application.yml
 - 数据库配置
 
-
 ### 启动项目
 访问localhost:8080
+
+
+
+***
+
+代码生成器。
+此生成器能够生成Entity,DTO,VO,Mapper,Service,Controller.
+一整套可执行的CRUD代码，此套代码可以规范Java接口建设。
+如有新加的接口，则其功能不能重复
