@@ -1,4 +1,4 @@
-package ${package}.service;
+package ${package}.${moduleName}.service.handle;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -9,15 +9,12 @@ import org.springframework.stereotype.Service;
 import win.trust.door.model.base.DataWithPagination;
 import win.trust.door.model.base.PageRequest;
 import win.trust.door.model.base.ResultData;
-
-import ${package}.model.${className}.request.${className}AddRequest;
-import ${package}.model.${className}.request.${className}UpdateRequest;
-
+import ${package}.${moduleName}.request.${className}AddRequest;
+import ${package}.${moduleName}.request.${className}UpdateRequest;
+import ${package}.${moduleName}.request.${className}BatchDeleteRequest;
 import ${package}.${moduleName}.dto.${className}QueryDTO;
-import ${package}.${moduleName}.model.${className};
-import ${package}.${moduleName}.dto.${className}InsertDTO;
-import ${package}.${moduleName}.dto.${className}UpdateDTO;
-import ${package}.${moduleName}.vo.${className}VO;
+import ${package}.service.${moduleName}.${className}Service;
+import ${package}.${moduleName}.entity.${className};
 
 import java.util.List;
 
@@ -54,7 +51,7 @@ public class Handle${className}Service {
         }
         dataWithPagination.setList(list);
         //查询总数
-        ${className}QueryDTO dto = new ${className}QueryDTO();
+            ${className}QueryDTO dto = new ${className}QueryDTO();
         BeanUtils.copyProperties(info, dto);
         int totalCount = ${classname}Service.queryCount(dto);
         dataWithPagination.setTotalCount(totalCount);
@@ -64,53 +61,54 @@ public class Handle${className}Service {
         return dataWithPagination;
     }
 
-    public ResultData<Integer> ${classname}Add(${className}AddRequest request) {
-        ${className}QueryDTO queryDTO = new ${className}QueryDTO();
+    public Boolean add(${className}AddRequest request) {
+            ${className}QueryDTO queryDTO = new ${className}QueryDTO();
         BeanUtils.copyProperties(request, queryDTO);
-        ${className}VO vo = ${classname}Service.queryInfo(queryDTO);
+        ${className} vo = ${classname}Service.queryInfo(queryDTO);
         if (ObjectUtils.isNotEmpty(vo)) {
-            return ResultData.error("名称已存在");
+            throw new SystemException("信息已存在");
         }
-        ${className} ${classname} = new ${className}();
-        BeanUtils.copyProperties(request, ${classname});
-        return ResultData.success(${classname}Service.insertSelective(${classname}));
-    }
-
-    public ResultData ${classname}(Integer id) {
-        ${className}QueryDTO queryDTO = new ${className}QueryDTO();
-        queryDTO.setId(id);
-        ${className}VO vo = ${classname}Service.queryInfo(queryDTO);
-        return ResultData.success(vo);
-    }
-
-    public ResultData ${classname}Edit(${className}UpdateRequest request) {
-        boolean exist = verify${classname}ExistById(request.getId());
-        if (!exist) {
-            return ResultData.error("不存在");
-        }
-        if (ObjectUtils.isNotEmpty(request.getName()) && verify${classname}NameExist(request.getName())) {
-            return ResultData.error("名称已存在");
-        }
-        ${className} info = new ${className}();
-        BeanUtils.copyProperties(request, info);
-        Integer result = ${classname}Service.updateById(info);
-        return ResultData.success(result);
-    }
-
-    private boolean verify${classname}ExistById(Integer id) {
-        ${className}QueryDTO queryDTO = new ${className}QueryDTO();
-        queryDTO.setId(id);
-        ${className}VO vo = ${classname}Service.queryInfo(queryDTO);
-        if (ObjectUtils.isEmpty(vo)) {
-            return false;
-        }
+            ${className}InsertDTO insertDTO = new ${className}InsertDTO();
+        BeanUtils.copyProperties(request, insertDTO);
+            ${classname}Service.insertSelective(insertDTO);
         return true;
     }
 
-    private boolean verify${classname}NameExist(String name) {
-        ${className}QueryDTO queryDTO = new ${className}QueryDTO();
-        queryDTO.setName(name);
-        ${className}VO vo = ${classname}Service.queryInfo(queryDTO);
+    public ResultData<${className}> info(Integer id) {
+            ${className}QueryDTO queryDTO = new ${className}QueryDTO();
+        queryDTO.setId(id);
+        ${className} vo = ${classname}Service.queryInfo(queryDTO);
+        return ResultData.success(vo);
+    }
+
+    public ResultData update(${className}UpdateRequest request) {
+        boolean exist = verifyInfoExistById(request.getId());
+        if (!exist) {
+            throw new SystemException("信息不存在");
+        }
+            ${className}UpdateDTO info = new ${className}UpdateDTO();
+        BeanUtils.copyProperties(request, info);
+            ${classname}Service.updateById(info);
+        return true;
+    }
+
+    public Boolean delete(Integer id) {
+        boolean exist = verifyAreaExistById(id);
+        if (!exist) {
+            throw new SystemException("不存在");
+        }
+        ${className} info = new ${className}();
+        info.setId(id);
+        info.setIsDelete(1);
+            ${classname}Service.updateById(info);
+        return true;
+    }
+
+
+    private boolean verifyAreaExistById(Integer id) {
+            ${className}QueryDTO queryDTO = new ${className}QueryDTO();
+        queryDTO.setId(id);
+        ${className} vo = ${classname}Service.queryInfo(queryDTO);
         if (ObjectUtils.isEmpty(vo)) {
             return false;
         }

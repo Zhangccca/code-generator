@@ -5,7 +5,7 @@ import ${package}.${moduleName}.dto.${className}QueryDTO;
 import ${package}.${moduleName}.dto.${className}InsertDTO;
 import ${package}.${moduleName}.dto.${className}UpdateDTO;
 import ${package}.${moduleName}.vo.${className}VO;
-import com.shebao.framework.util.page.PageRequest;
+import ${package}.${moduleName}.entity.${className};
 
 import java.util.List;
 

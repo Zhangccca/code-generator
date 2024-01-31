@@ -44,6 +44,10 @@ public class GenUtils {
         templates.add("template/Service.java.vm");
         templates.add("template/ServiceImpl.java.vm");
         templates.add("template/Controller.java.vm");
+        templates.add("template/AddRequest.java.vm");
+        templates.add("template/BatchDeleteRequest.java.vm");
+        templates.add("template/UpdateRequest.java.vm");
+        templates.add("template/HandleService.java.vm");
         return templates;
     }
 
@@ -154,6 +158,8 @@ public class GenUtils {
             tpl.merge(context, sw);
 
             try {
+                System.out.println(getFileName(template, tableEntity.getClassName(),
+                        config.getString("package"), config.getString("moduleName")));
                 // 添加到zip
                 zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(),
                         config.getString("package"), config.getString("moduleName"))));
@@ -209,7 +215,15 @@ public class GenUtils {
             packagePath += packageName.replace(".", File.separator) + File.separator + moduleName
                     + File.separator;
         }
-
+        if (template.contains("AddRequest.java.vm")) {
+            return packagePath + "request" + File.separator + className + "AddRequest.java";
+        }
+        if (template.contains("BatchDeleteRequest.java.vm")) {
+            return packagePath + "request" + File.separator + className + "BatchDeleteRequest.java";
+        }
+        if (template.contains("UpdateRequest.java.vm")) {
+            return packagePath + "request" + File.separator + className + "UpdateRequest.java";
+        }
         if (template.contains("Entity.java.vm")) {
             return packagePath + "entity" + File.separator + className + ".java";
         }
@@ -230,8 +244,13 @@ public class GenUtils {
             return packagePath + "mapper" + File.separator + className + "Mapper.java";
         }
 
-        if (template.contains("Service.java.vm")) {
+        if (template.contains("Service.java.vm") && !template.contains("HandleService.java.vm")) {
             return packagePath + "service" + File.separator + className + "Service.java";
+        }
+
+        if (template.contains("HandleService.java.vm")) {
+            System.out.println(packagePath + "service" + File.separator + "handle" + File.separator + "Handle" + className + "Service.java");
+            return packagePath + "service" + File.separator + "handle" + File.separator + "Handle" + className + "Service.java";
         }
 
         if (template.contains("ServiceImpl.java.vm")) {

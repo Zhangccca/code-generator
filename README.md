@@ -23,7 +23,7 @@ If there is a new interface added, its function cannot be duplicated.
 ### application.yml
 - 数据库配置
 
-### 启动项目
+### 启动项目 - 具体端口号参见控制台实际输出
 访问localhost:8080
 
 

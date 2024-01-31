@@ -21,7 +21,7 @@ public interface ${className}Mapper {
     /**
      * 分页获取 ${className} 列表
      *
-     * @param QueryDTO
+     * @param ${classname}QueryDTO
      * @return
      */
     List<${className}VO> queryListForPage(${className}QueryDTO ${classname}QueryDTO);
@@ -29,7 +29,7 @@ public interface ${className}Mapper {
     /**
      * 查询 ${className} 详情
      *
-     * @param QueryDTO
+     * @param ${classname}QueryDTO
      * @return
      */
         ${className}VO queryInfo(${className}QueryDTO ${classname}QueryDTO);
@@ -56,31 +56,31 @@ public interface ${className}Mapper {
 
     /**
      * 根据条件查询 ${className} 数据总数
-     * @param QueryDTO
+     * @param ${classname}QueryDTO
      * @return
      */
     Integer queryCount(${className}QueryDTO ${classname}QueryDTO);
 
 
     /**
-    * 条件筛选并分页查询 ${className} 列表数据
+     * 条件筛选并分页查询 ${className} 列表数据
      * @param offset
      * @param limit
      * @return
-    */
+     */
     List<${className}> selectListByPage(@Param("info") ${className} info, @Param("offset") Integer offset, @Param("limit") Integer limit);
 
     /**
-    * 根据主键更新 ${className} 数据
+     * 根据主键更新 ${className} 数据
      * @return
-    */
+     */
     int updateByPrimaryKeySelective(${className} info);
 
     /**
-    * 根据id列表批量删除 ${className} 数据
-    * @param ids
-    * @return
-    */
+     * 根据id列表批量删除 ${className} 数据
+     * @param ids
+     * @return
+     */
     int batchDeleteByPrimaryKey(@Param("ids") List<Integer> ids);
 
 
