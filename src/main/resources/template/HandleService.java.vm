@@ -74,14 +74,13 @@ public class Handle${className}Service {
         return true;
     }
 
-    public ResultData<${className}> info(Integer id) {
+    public ${className} info(Integer id) {
             ${className}QueryDTO queryDTO = new ${className}QueryDTO();
         queryDTO.setId(id);
-        ${className} vo = ${classname}Service.queryInfo(queryDTO);
-        return ResultData.success(vo);
+        return ${classname}Service.queryInfo(queryDTO);
     }
 
-    public ResultData update(${className}UpdateRequest request) {
+    public Boolean update(${className}UpdateRequest request) {
         boolean exist = verifyInfoExistById(request.getId());
         if (!exist) {
             throw new SystemException("信息不存在");
@@ -93,7 +92,7 @@ public class Handle${className}Service {
     }
 
     public Boolean delete(Integer id) {
-        boolean exist = verifyAreaExistById(id);
+        boolean exist = verifyInfoExistById(id);
         if (!exist) {
             throw new SystemException("不存在");
         }
@@ -105,7 +104,7 @@ public class Handle${className}Service {
     }
 
 
-    private boolean verifyAreaExistById(Integer id) {
+    private boolean verifyInfoExistById(Integer id) {
             ${className}QueryDTO queryDTO = new ${className}QueryDTO();
         queryDTO.setId(id);
         ${className} vo = ${classname}Service.queryInfo(queryDTO);

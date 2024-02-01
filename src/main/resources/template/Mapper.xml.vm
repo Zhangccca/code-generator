@@ -40,6 +40,9 @@
     </insert>
 
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="$pk.columnName">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         INSERT INTO $tableName
         <trim prefix="(" suffix=")" suffixOverrides=",">
             #foreach($column in $columns)
@@ -79,6 +82,22 @@
                 #else
                     <if test="$column.attrname != null">
                         AND $column.columnName=#{$column.attrname}
+                    </if>
+                #end
+            #end
+        </where>
+    </sql>
+
+    <sql id="findPage_where_with_param">
+        <where>
+            #foreach($column in $columns)
+                #if($column.attrType=='String')
+                    <if test="info.$column.attrname != null and info.$column.attrname != ''">
+                        AND $column.columnName = #{info.$column.attrname}
+                    </if>
+                #else
+                    <if test="$column.attrname != null">
+                        AND $column.columnName=#{info.$column.attrname}
                     </if>
                 #end
             #end
@@ -137,12 +156,10 @@
     <select id="selectListByPage" parameterType="${package}.${moduleName}.entity.${className}"
             resultMap="${classname}Map"
     >
-        select <include refid="columns"/>
+        select
+        <include refid="columns"/>
         FROM $tableName
-        <where>
-            1=1
-            <include refid="findPage_where"/>
-        </where>
+        <include refid="findPage_where_with_param"/>
         ORDER BY update_time DESC
         LIMIT #{offset}, #{limit}
     </select>
@@ -163,4 +180,18 @@
             </foreach>
         </if>
     </update>
+
+    <insert id="insertBatch" parameterType="${package}.${moduleName}.entity.${className}"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO $tableName (
+        #foreach($column in $columns)
+        $column.columnName#if($velocityHasNext),#end
+        #end
+        ) VALUES (
+        <foreach item="item" collection="list" separator=",">
+            ( #foreach($column in $columns)
+            #{$column.attrname}#if($velocityHasNext),#end
+            #end)
+        </foreach>
+    </insert>
 </mapper>

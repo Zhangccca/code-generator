@@ -25,12 +25,12 @@ public class ${className}ServiceImpl implements ${className}Service {
 
 
     @Override
-    public List<${className}VO> queryListForPage(${className}QueryDTO ${classname}QueryDTO) {
+    public List<${className}> queryListForPage(${className}QueryDTO ${classname}QueryDTO) {
         return ${classname}Mapper.queryListForPage(${classname}QueryDTO);
     }
 
     @Override
-    public ${className}VO queryInfo(${className}QueryDTO ${classname}QueryDTO) {
+    public ${className} queryInfo(${className}QueryDTO ${classname}QueryDTO) {
         return ${classname}Mapper.queryInfo(${classname}QueryDTO);
     }
 
@@ -42,9 +42,7 @@ public class ${className}ServiceImpl implements ${className}Service {
     }
 
     @Override
-    public Integer insertSelective(${className}InsertDTO ${classname}InsertDTO) {
-        ${className} ${classname} =new ${className}();
-        BeanUtils.copyProperties(${classname}InsertDTO, ${classname});
+    public Integer insertSelective(${className} ${classname}) {
         return ${classname}Mapper.insertSelective(${classname});
     }
 
@@ -64,5 +62,20 @@ public class ${className}ServiceImpl implements ${className}Service {
     @Override
     public List<${className}> selectListByPage(${className} info, Integer offset, Integer limit) {
         return ${classname}Mapper.selectListByPage(info, offset, limit);
+    }
+
+    @Override
+    public List<${className}> batchQueryByPrimaryKey(@Param("ids") List<Integer> ids) {
+        return ${classname}Mapper.batchQueryByPrimaryKey(ids);
+    }
+
+    @Override
+    public int batchDeleteByPrimaryKey(@Param("ids") List<Integer> ids) {
+        return ${classname}Mapper.batchDeleteByPrimaryKey(ids);
+    }
+
+    @Override
+    public int batchInsert(List<${className}> list) {
+        return ${classname}Mapper.insertBatch(list);
     }
 }

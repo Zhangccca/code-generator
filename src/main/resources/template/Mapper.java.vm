@@ -24,7 +24,7 @@ public interface ${className}Mapper {
      * @param ${classname}QueryDTO
      * @return
      */
-    List<${className}VO> queryListForPage(${className}QueryDTO ${classname}QueryDTO);
+    List<${className}> queryListForPage(${className}QueryDTO ${classname}QueryDTO);
 
     /**
      * 查询 ${className} 详情
@@ -32,7 +32,7 @@ public interface ${className}Mapper {
      * @param ${classname}QueryDTO
      * @return
      */
-        ${className}VO queryInfo(${className}QueryDTO ${classname}QueryDTO);
+        ${className} queryInfo(${className}QueryDTO ${classname}QueryDTO);
 
     /**
      * 新增 ${className} 数据
@@ -83,5 +83,18 @@ public interface ${className}Mapper {
      */
     int batchDeleteByPrimaryKey(@Param("ids") List<Integer> ids);
 
+    /**
+     * 根据主键批量查询 ${className} 数据
+     *
+     * @param ids
+     * @return
+     */
+    List<${className}> batchQueryByPrimaryKey(@Param("ids") List<Integer> ids);
 
+    /**
+     * 批量插入 ${className}  数据
+     * @param list
+     * @return
+     */
+    int batchInsert(List<${className}> list);
 }
